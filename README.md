@@ -1,5 +1,6 @@
 # Laboratorio NoSQL: API de domicilios en Cassandra (cassandra-nosql2023)
-Laboratorio 2 de Taller de Bases de Datos NoSQL 2023 utilizando **Apache Cassandra**.
+**Laboratorio 2 de Taller de Bases de Datos NoSQL 2023 utilizando Apache Cassandra.** <br>
+El repositorio contiene una solución de .NET cuyo proyecto principal es una API para almacenar en y consultar domicilios desde una base de datos Apache Cassandra.
 
 
 Grupo
