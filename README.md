@@ -15,7 +15,7 @@ Para poder usar Cassandra, debe asegurarse de tener instalado **Java SE 8 u Open
 
 Debe instalar **WSL 2** con **Ubuntu**:
 - Ejecute PowerShell como administrador.
-- Ejecute el siguiente comando: `wsl --install -d ubuntu`
+- Ejecute el siguiente comando: `wsl --install -d ubuntu`.
 - Reinicie la computadora y ejecute Ubuntu si no lo hace automáticamente.
 - Configure su usuario de Ubuntu.
 - Actualice toda aplicación de Ubuntu y repositorios a la última versión usando `sudo apt update` y luego `sudo apt upgrade`.
