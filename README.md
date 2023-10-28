@@ -9,8 +9,8 @@ Grupo
 - Grasso, Sebastián
 
 
-Despliegue de Docker en Windows
--------------------------------
+Instalar Cassandra con Docker en Windows
+----------------------------------------
 Para poder usar Cassandra, debe asegurarse de tener instalado **Java SE 8 u OpenJDK 8**.
 
 Debe instalar **WSL 2** con **Ubuntu**:
@@ -22,7 +22,7 @@ Debe instalar **WSL 2** con **Ubuntu**:
 
 Ahora puede descargar e instalar **Docker Desktop** desde la [página oficial de Docker](https://www.docker.com/products/docker-desktop/).
 
-Para desplegar Cassandra en Docker, tiene dos opciones:
+Para instalar la imagen de Cassandra en Docker, tiene dos opciones:
 1. **Con Docker Desktop**
     - En el buscador, escriba **"Cassandra"**.
     - Seleccione el primer resultado.
@@ -37,4 +37,4 @@ Para desplegar Cassandra en Docker, tiene dos opciones:
     - Haga clic en **Run**.
 2. **Por consola**
     - `docker pull cassandra:latest` para obtener la última imagen de Cassandra.
-    - `docker run --name cass_cluster cassandra:latest` para desplegar un nuevo contenedor en Docker.
+    - `docker run --name cass_cluster cassandra:latest` para instalar un nuevo contenedor de Cassandra en Docker con nombre *cass_cluster*.
