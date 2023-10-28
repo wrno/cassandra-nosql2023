@@ -28,8 +28,11 @@ Para desplegar Cassandra en Docker, tiene dos opciones:
     - Seleccione el primer resultado.
     - Haga clic en **Pull**.
     - Vaya al menú **Images**.
-    - Haga clic en ![Run](https://github.com/wrno/cassandra-nosql2023/assets/102438410/16b60595-f383-4068-9770-8d78952d4774 "Run")
- en la imagen llamada *cassandra*.
+    - Haga clic en
+           <picture>
+               <img alt="Run" title="Run" src="https://github.com/wrno/cassandra-nosql2023/assets/102438410/16b60595-f383-4068-9770-8d78952d4774">
+           </picture>
+      en la imagen llamada *cassandra*.
     - Opcionalmente, puede definir nombre y puertos del contenedor.
     - Haga clic en **Run**.
 2. **Por consola**
