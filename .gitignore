@@ -1,0 +1,39 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# Logs (specific to Web API if you log errors or info)
+logs/
+
+# Temporary files for your Web API, if any
+temp/
+
+# Windows image file caches
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# .NET Core
+*.swp
+*.user
+*.lock.db3
+*.exe
+*.pid
+*.db
+*.log
+*.vsconfig
+
+# ASP.NET Core
+bin/
+obj/
+*.sln.DotSettings.user
+
+# Project Specific
+**/appsettings.*.json
+**/Properties/launchSettings.json
