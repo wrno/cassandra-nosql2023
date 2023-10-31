@@ -1,8 +1,8 @@
 ﻿using Cassandra.Mapping.Attributes;
 
-namespace API.Models
+namespace Models
 {
-    [Table]
+    [Table("domiciliosporbarrio")]
     public class DomicilioPorBarrio
     {
         [PartitionKey(1)]
@@ -21,18 +21,18 @@ namespace API.Models
         public int Nro { get; set; }
 
         [ClusteringKey(3)]
-        public int Apartamento { get; set; }
+        public int? Apartamento { get; set; }
 
         [ClusteringKey(4)]
-        public int Padron { get; set; }
+        public int? Padron { get; set; }
 
         [ClusteringKey(5)]
-        public string Ruta { get; set; }
+        public string? Ruta { get; set; }
 
         [ClusteringKey(6)]
-        public float Km { get; set; }
+        public float? Km { get; set; }
 
         [ClusteringKey(7)]
-        public string Letra { get; set; }
+        public string? Letra { get; set; }
     }
 }

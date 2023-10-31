@@ -1,4 +1,19 @@
+using BLL.Services;
+using BLL.Services.Implementation;
+using DAL.Persistence;
+using DAL.Repositories;
+using DAL.Repositories.Implementation;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// DbContext
+builder.Services.AddSingleton<CassandraContext>();
+
+// Repositories
+builder.Services.AddScoped<IPersonaRepository, PersonaRepository>();
+
+// Services
+builder.Services.AddScoped<IPersonaService, PersonaService>();
 
 // Add services to the container.
 

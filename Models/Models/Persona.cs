@@ -1,15 +1,21 @@
 ﻿using Cassandra.Mapping.Attributes;
 
-namespace API.Models
+namespace Models
 {
-    [Table()]
+    [Table("personas")]
     public class Persona
     {
         [PartitionKey]
-        public string Ci { get; set; }
+        [Column("ci")]
+        public int Ci { get; set; }
 
+        [Column("nombre")]
         public string Nombre { get; set; }
+
+        [Column("apellido")]
         public string Apellido { get; set; }
+
+        [Column("edad")]
         public int Edad { get; set; }
     }
 }
