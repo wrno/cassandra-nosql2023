@@ -40,11 +40,24 @@ Para instalar la imagen de Cassandra en Docker, tiene dos opciones:
     - `docker pull cassandra:latest` para obtener la última imagen de Cassandra.
     - `docker run -p 127.0.0.1:9042:9042 --name cass_cluster cassandra:latest` para instalar un nuevo contenedor de Cassandra en Docker con nombre *cass_cluster*, mapeando el puerto 9042 (derecha) en `127.0.0.1:9042`.
 
-Configuración de la aplicación
-------------------------------
+Configurar la aplicación
+-------------------------
 Modificar **`API/appsettings.json`** según las necesidades:
 - ***AppSettings:Cassandra:Username*** es el nombre de usuario con el cual se conecta al contenedor de Cassandra.
 - ***AppSettings:Cassandra:Password*** es la contraseña con la cual se conecta al contenedor de Cassandra.
 - ***AppSettings:Cassandra:ContactPoint*** es la IP a través de la cual se accede a Cassandra.
 - ***AppSettings:Cassandra:Port*** es el puerto en el que se mapeó el puerto 9042 de Cassandra.
 - ***AppSettings:Cassandra:Keyspace*** es el nombre del keyspace en el cual guardaremos los datos.
+
+#### IMPORTANTE
+Es posible que al intentar conectarse a la IP especificada (sea `127.0.0.1`, `localhost` o cual sea) en el `docker run` no sea suficiente para llegar al contenedor de Cassandra. En ese caso, seguir los siguientes pasos:
+1. **Con Docker Desktop**
+    - Seleccione el contenedor.
+    - Clic en *Exec*.
+    - Ejecute `cqlsh`.
+2. **Por consola**
+    - Ejecute `docker exec -it cass_cluster cqlsh` cambiando *cass_cluster* por el nombre que le puso al contenedor.
+
+Una vez llegados a este punto, independientemente de qué herramienta uso, siga los siguientes pasos:
+- Ejecute el siguiente comando: `SELECT listen_address FROM system.local;`
+- Use la IP devuelta como *contact point* en `API/appsettings.json`.
