@@ -54,8 +54,8 @@ Se debe generar una tabla por cada consulta que definimos en el anterior. De est
 
 ### personas
 | Columna  | Tipo | Índice |
-|----------|------|--------|
-| ci       | int  | **PK** |
+|----------|------|:------:|
+| ci       | int  |  **K** |
 | nombre   | text |        |
 | apellido | text |        |
 | edad     | int  |        |
@@ -63,7 +63,7 @@ Se debe generar una tabla por cada consulta que definimos en el anterior. De est
 ### domiciliosporpersona
 | Columna      | Tipo      | Índice  |
 |--------------|-----------|:-------:|
-| ci           | int       |  **PK** |
+| ci           | int       |  **K**  |
 | departamento | text      |  **C↑** |
 | localidad    | text      |  **C↑** |
 | barrio       | text      |  **C↑** |
@@ -82,7 +82,7 @@ Se debe generar una tabla por cada consulta que definimos en el anterior. De est
 ### domiciliospordepartamento
 | Columna      | Tipo      | Índice  |
 |--------------|-----------|:-------:|
-| ci           | int       |  **PK** |
+| ci           | int       |  **K**  |
 | departamento | text      |  **C↑** |
 | localidad    | text      |  **C↑** |
 | barrio       | text      |  **C↑** |
