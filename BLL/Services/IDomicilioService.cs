@@ -10,13 +10,13 @@ namespace BLL.Services
 	public interface IDomicilioService
 	{
 		DomicilioPersonaDTO AgregarDomicilio(NuevoDomicilioDTO domicilio);
-		List<DomicilioPersonaDTO> ConsultarDomicilio(int ci, int? skip, int? count);
-		List<DomicilioDTO> ConsultarDomiciliosPorDepartamento(string departamento);
-		List<DomicilioDTO> ConsultarDomiciliosPorLocalidad(string localidad);
-		List<DomicilioDTO> ConsultarDomiciliosPorBarrio(string barrio);
-		List<DomicilioDTO> ConsultarDomiciliosPorDepartamentoLocalidad(string departamento, string localidad);
-		List<DomicilioDTO> ConsultarDomiciliosPorDepartamentoBarrio(string departamento, string barrio);
-		List<DomicilioDTO> ConsultarDomiciliosPorLocalidadBarrio(string localidad, string barrio);
-		List<DomicilioDTO> ConsultarDomiciliosPorDepartamentoLocalidadBarrio(string departamento, string localidad, string barrio);
+		Task<List<DomicilioPersonaDTO>> ConsultarDomicilio(int ci, int? skip, int? count);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamento(string departamento);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidad(string localidad);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorBarrio(string barrio);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidad(string departamento, string localidad);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoBarrio(string departamento, string barrio);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidadBarrio(string localidad, string barrio);
+		Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidadBarrio(string departamento, string localidad, string barrio);
 	}
 }

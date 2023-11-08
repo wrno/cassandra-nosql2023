@@ -12,26 +12,26 @@ namespace API.Controllers
     public class DomicilioController : ControllerBase
     {
         private readonly IPersonaService _personaService;
+        private readonly IDomicilioService _domicilioService;
 
-        public DomicilioController(IPersonaService personaService)
+        public DomicilioController(IPersonaService personaService, IDomicilioService domicilioService)
         {
             _personaService = personaService;
+            _domicilioService = domicilioService;
         }
 
         // POST api/<DomicilioController>
         [HttpPost]
-        public async Task<ActionResult<DomicilioPersonaDTO>> AgregarDomicilio([Required] NuevoDomicilioDTO domicilio)
+        public ActionResult<DomicilioPersonaDTO> AgregarDomicilio([Required] NuevoDomicilioDTO domicilio)
         {
             if (_personaService.Existe(domicilio.Ci))
             {
-                // AgregarDomicilio
+                return _domicilioService.AgregarDomicilio(domicilio);
             }
             else
 			{
 				return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
 			}
-
-            return StatusCode(StatusCodes.Status501NotImplemented);
         }
 
         // GET api/<DomicilioController>/persona/{ci}
@@ -45,14 +45,12 @@ namespace API.Controllers
         {
             if (_personaService.Existe(ci))
             {
-                // ConsultarDomicilio
+                return await _domicilioService.ConsultarDomicilio(ci, skip, count);
             }
             else
 			{
 				return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
 			}
-
-            return StatusCode(StatusCodes.Status501NotImplemented);
         }
 
         // GET api/<DomicilioController>
@@ -68,22 +66,22 @@ namespace API.Controllers
                 {
                     if (!string.IsNullOrEmpty(barrio))
                     {
-                        // DomicilioPorDepartamentoLocalidadBarrio
+                        return await _domicilioService.ConsultarDomiciliosPorDepartamentoLocalidadBarrio(departamento, localidad, barrio);
                     }
                     else
                     {
-                        // DomicilioPorDepartamentoLocalidad
+                        return await _domicilioService.ConsultarDomiciliosPorDepartamentoLocalidad(departamento, localidad);
                     }
                 }
                 else
                 {
                     if (!string.IsNullOrEmpty(barrio))
                     {
-                        // DomicilioPorDepartamentoBarrio
+                        return await _domicilioService.ConsultarDomiciliosPorDepartamentoBarrio(departamento, barrio);
                     }
                     else
                     {
-                        // DomicilioPorDepartamento
+                        return await _domicilioService.ConsultarDomiciliosPorDepartamento(departamento);
                     }
                 }
             }
@@ -93,11 +91,11 @@ namespace API.Controllers
                 {
                     if (!string.IsNullOrEmpty(barrio))
                     {
-                        // DomicilioPorLocalidadBarrio
+                        return await _domicilioService.ConsultarDomiciliosPorLocalidadBarrio(localidad, barrio);
                     }
                     else
                     {
-                        // DomicilioPorLocalidad
+                        return await _domicilioService.ConsultarDomiciliosPorLocalidad(localidad);
                     }
                 }
                 else
@@ -105,6 +103,7 @@ namespace API.Controllers
                     if (!string.IsNullOrEmpty(barrio))
                     {
                         // DomicilioPorBarrio
+                        return await _domicilioService.ConsultarDomiciliosPorBarrio(barrio);
                     }
                     else
                     {
