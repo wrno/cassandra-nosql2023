@@ -12,9 +12,11 @@ builder.Services.AddSingleton<CassandraContext>();
 
 // Repositories
 builder.Services.AddScoped<IPersonaRepository, PersonaRepository>();
+builder.Services.AddScoped<IDomicilioRepository, DomicilioRepository>();
 
 // Services
 builder.Services.AddScoped<IPersonaService, PersonaService>();
+builder.Services.AddScoped<IDomicilioService, DomicilioService>();
 
 // Add services to the container.
 builder.Services.AddAutoMapper(Assembly.Load(nameof(BLL)));

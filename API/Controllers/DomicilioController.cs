@@ -1,4 +1,5 @@
-﻿using Core.DTO;
+﻿using BLL.Services;
+using Core.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,11 +11,27 @@ namespace API.Controllers
     [ApiController]
     public class DomicilioController : ControllerBase
     {
+        private readonly IPersonaService _personaService;
+
+        public DomicilioController(IPersonaService personaService)
+        {
+            _personaService = personaService;
+        }
+
         // POST api/<DomicilioController>
         [HttpPost]
         public async Task<ActionResult<DomicilioPersonaDTO>> AgregarDomicilio([Required] NuevoDomicilioDTO domicilio)
         {
-            return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
+            if (_personaService.Existe(domicilio.Ci))
+            {
+                // AgregarDomicilio
+            }
+            else
+			{
+				return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
+			}
+
+            return StatusCode(StatusCodes.Status501NotImplemented);
         }
 
         // GET api/<DomicilioController>/persona/{ci}
@@ -26,7 +43,16 @@ namespace API.Controllers
             int? skip, 
             int? count)
         {
-            return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
+            if (_personaService.Existe(ci))
+            {
+                // ConsultarDomicilio
+            }
+            else
+			{
+				return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
+			}
+
+            return StatusCode(StatusCodes.Status501NotImplemented);
         }
 
         // GET api/<DomicilioController>
