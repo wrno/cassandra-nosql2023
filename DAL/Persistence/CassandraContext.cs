@@ -27,6 +27,10 @@ namespace DAL.Persistence
         public readonly Table<DomicilioPorDepartamento> domiciliospordepartamento;
         public readonly Table<DomicilioPorLocalidad> domiciliosporlocalidad;
         public readonly Table<DomicilioPorBarrio> domiciliosporbarrio;
+        public readonly Table<DomicilioPorDepartamentoLocalidad> domiciliospordepartamentolocalidad;
+        public readonly Table<DomicilioPorDepartamentoBarrio> domiciliospordepartamentobarrio;
+        public readonly Table<DomicilioPorLocalidadBarrio> domiciliosporlocalidadbarrio;
+        public readonly Table<DomicilioPorDepartamentoLocalidadBarrio> domiciliospordepartamentolocalidadbarrio;
 
         public CassandraContext(IConfiguration configuration)
         {
@@ -51,6 +55,10 @@ namespace DAL.Persistence
             domiciliospordepartamento = new(_session);
             domiciliosporlocalidad = new(_session);
             domiciliosporbarrio = new(_session);
+            domiciliospordepartamentolocalidad = new(_session);
+            domiciliospordepartamentobarrio = new(_session);
+            domiciliosporlocalidadbarrio = new(_session);
+            domiciliospordepartamentolocalidadbarrio = new(_session);
 
             CrearModelos();
         }
@@ -62,6 +70,10 @@ namespace DAL.Persistence
             domiciliospordepartamento.CreateIfNotExists();
             domiciliosporlocalidad.CreateIfNotExists();
             domiciliosporbarrio.CreateIfNotExists();
+            domiciliospordepartamentolocalidad.CreateIfNotExists();
+            domiciliospordepartamentobarrio.CreateIfNotExists();
+            domiciliosporlocalidadbarrio.CreateIfNotExists();
+            domiciliospordepartamentolocalidadbarrio.CreateIfNotExists();
         }
     }
 }

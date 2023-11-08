@@ -11,7 +11,7 @@ namespace Models
          * en Flores apenas se contaron menos de 9.000 hogares.
         */
 
-        [PartitionKey]
+        [PartitionKey(1)]
         [Column("departamento")]
         public string Departamento { get; set; }
 
@@ -33,22 +33,22 @@ namespace Models
 
         [ClusteringKey(5)]
         [Column("apartamento")]
-        public int Apartamento { get; set; }
+        public int? Apartamento { get; set; }
 
         [ClusteringKey(6)]
         [Column("padron")]
-        public int Padron { get; set; }
+        public int? Padron { get; set; }
 
         [ClusteringKey(7)]
         [Column("ruta")]
-        public string Ruta { get; set; }
+        public string? Ruta { get; set; }
 
         [ClusteringKey(8)]
         [Column("km")]
-        public float Km { get; set; }
+        public float? Km { get; set; }
 
         [ClusteringKey(9)]
         [Column("letra")]
-        public string Letra { get; set; }
+        public string? Letra { get; set; }
     }
 }

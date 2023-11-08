@@ -17,8 +17,8 @@ namespace API.Controllers
             return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
         }
 
-        // GET api/<DomicilioController>/5
-        [HttpGet]
+        // GET api/<DomicilioController>/persona/{ci}
+        [HttpGet("persona/{ci}")]
         public async Task<ActionResult<List<DomicilioPersonaDTO>>> ConsultarDomicilio(
             [Required]
             [Range(10000000, int.MaxValue, ErrorMessage = "Cédula inválida.")]
@@ -28,5 +28,65 @@ namespace API.Controllers
         {
             return StatusCode(StatusCodes.Status402PaymentRequired, "No existe una persona con la cédula aportada como parámetro.");
         }
-    }
+
+        // GET api/<DomicilioController>
+        [HttpGet]
+        public async Task<ActionResult<List<DomicilioDTO>>> ObtenerDomiciliosPorCriterio(
+            string? departamento,
+            string? localidad,
+            string? barrio)
+        {
+            if (!string.IsNullOrEmpty(departamento))
+            {
+                if (!string.IsNullOrEmpty(localidad))
+                {
+                    if (!string.IsNullOrEmpty(barrio))
+                    {
+                        // DomicilioPorDepartamentoLocalidadBarrio
+                    }
+                    else
+                    {
+                        // DomicilioPorDepartamentoLocalidad
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(barrio))
+                    {
+                        // DomicilioPorDepartamentoBarrio
+                    }
+                    else
+                    {
+                        // DomicilioPorDepartamento
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(localidad))
+                {
+                    if (!string.IsNullOrEmpty(barrio))
+                    {
+                        // DomicilioPorLocalidadBarrio
+                    }
+                    else
+                    {
+                        // DomicilioPorLocalidad
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(barrio))
+                    {
+                        // DomicilioPorBarrio
+                    }
+                    else
+                    {
+                        return StatusCode(StatusCodes.Status400BadRequest, "Debe especificar al menos un criterio.");
+                    }
+                }
+            }
+            return StatusCode(StatusCodes.Status501NotImplemented);
+        }
+	}
 }

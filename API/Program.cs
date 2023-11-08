@@ -3,6 +3,7 @@ using BLL.Services.Implementation;
 using DAL.Persistence;
 using DAL.Repositories;
 using DAL.Repositories.Implementation;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,7 @@ builder.Services.AddScoped<IPersonaRepository, PersonaRepository>();
 builder.Services.AddScoped<IPersonaService, PersonaService>();
 
 // Add services to the container.
-
+builder.Services.AddAutoMapper(Assembly.Load(nameof(BLL)));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

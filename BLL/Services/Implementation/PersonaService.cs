@@ -1,4 +1,5 @@
-﻿using Core.DTO;
+﻿using AutoMapper;
+using Core.DTO;
 using DAL.Repositories;
 using Models;
 using System;
@@ -11,10 +12,12 @@ namespace BLL.Services.Implementation
 {
     public class PersonaService : IPersonaService
     {
+        private readonly IMapper _mapper;
         private readonly IPersonaRepository _personaRepository;
 
-        public PersonaService(IPersonaRepository personaRepository)
+        public PersonaService(IMapper mapper, IPersonaRepository personaRepository)
         {
+            _mapper = mapper;
             _personaRepository = personaRepository;
         }
 
@@ -45,13 +48,7 @@ namespace BLL.Services.Implementation
 
                                 _persona = _personaRepository.Create(_persona);
 
-                                return new()
-                                {
-                                    Ci = _persona.Ci,
-                                    Nombre = _persona.Nombre,
-                                    Apellido = _persona.Apellido,
-                                    Edad = _persona.Edad
-                                };
+                                return _mapper.Map<PersonaDTO>(_persona);
                             }
                             else
                             {
