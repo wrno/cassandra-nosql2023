@@ -50,6 +50,15 @@ Sabiendo que estas son las únicas consultas que se pueden realizar, que en todo
 
 Modelado de datos
 -----------------
+### Referencias
+|  Clave  | Significado                      |
+|:-------:|----------------------------------|
+|  **K**  | Clave de partición               |
+|  **C↑** | Clave de clustering ascendente   |
+|  **C↓** | Clave de clustering descendiente |
+|  **S**  | Columna estática                 |
+| **IDX** | Índice secundario                |
+
 Se debe generar una tabla por cada consulta que definimos en el anterior. De esta forma, se generan las siguientes tablas en Apache Cassandra:
 
 ### personas
@@ -117,7 +126,7 @@ Se debe generar una tabla por cada consulta que definimos en el anterior. De est
 |--------------|-------|:------:|
 | barrio       | text  |  **K** |
 | departamento | text  | **C↑** |
-| localidad    | text  |  **K** |
+| localidad    | text  | **C↑** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
 | apartamento  | int   | **C↑** |
