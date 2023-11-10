@@ -59,7 +59,7 @@ Modelado de datos
 |  **S**  | Columna estática                 |
 | **IDX** | Índice secundario                |
 
-Se debe generar una tabla por cada consulta que definimos en el anterior. De esta forma, se generan las siguientes tablas en Apache Cassandra:
+Se debe generar una tabla por cada consulta que definimos en el punto anterior. De esta forma, se generan las siguientes tablas en Apache Cassandra:
 
 ### personas
 | Columna  | Tipo | Índice |
