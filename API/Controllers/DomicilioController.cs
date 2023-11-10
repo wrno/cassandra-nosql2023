@@ -111,7 +111,6 @@ namespace API.Controllers
                     }
                 }
             }
-            return StatusCode(StatusCodes.Status501NotImplemented);
         }
 	}
 }

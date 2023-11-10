@@ -35,22 +35,55 @@ namespace DAL.Persistence
         public CassandraContext(IConfiguration configuration)
         {
             _configuration = configuration;
-            string? username = _configuration.GetSection("AppSettings:Cassandra:Username").Value;
-            string? password = _configuration.GetSection("AppSettings:Cassandra:Password").Value;
-            string? contactPoint = _configuration.GetSection("AppSettings:Cassandra:ContactPoint").Value;
-            string? portString = _configuration.GetSection("AppSettings:Cassandra:Port").Value;
             string? keyspace = _configuration.GetSection("AppSettings:Cassandra:Keyspace").Value;
-            int.TryParse(portString, out int port);
+
+			//   ______________________________
+			//  |                              |
+			//  |   CONEXIÓN A BASE DE DATOS   |
+			//  |          **INICIO**          |
+			//  |______________________________|
+			//
+
+			// USAR SI SE CONECTA A LOCALHOST:
+
+			//string? username = _configuration.GetSection("AppSettings:Cassandra:Username").Value;
+			//string? password = _configuration.GetSection("AppSettings:Cassandra:Password").Value;
+			//string? contactPoint = _configuration.GetSection("AppSettings:Cassandra:ContactPoint").Value;
+			//string? portString = _configuration.GetSection("AppSettings:Cassandra:Port").Value;
+			//int.TryParse(portString, out int port);
+
+			//_cluster = Cluster.Builder()
+			//    .WithCredentials(username, password)
+			//    .AddContactPoint(contactPoint)
+			//    .WithPort(port)
+			//    .WithDefaultKeyspace(keyspace)
+			//    .Build();
+
+			//_session = _cluster.ConnectAndCreateDefaultKeyspaceIfNotExists();
+
+
+			// USAR SI SE CONECTA A DATASTAX ASTRA DB:
+
+			string? bundle = _configuration.GetSection("AppSettings:Cassandra:BundlePath").Value;
+            string? client = _configuration.GetSection("AppSettings:Cassandra:ClientId").Value;
+            string? secret = _configuration.GetSection("AppSettings:Cassandra:ClientSecret").Value;
 
             _cluster = Cluster.Builder()
-                .WithCredentials(username, password)
-                .AddContactPoint(contactPoint)
-                .WithPort(port)
-                .WithDefaultKeyspace(keyspace)
-                .Build();
-            _session = _cluster.ConnectAndCreateDefaultKeyspaceIfNotExists();
+                .WithCloudSecureConnectionBundle(bundle)
+                .WithCredentials(client, secret)
+				.WithDefaultKeyspace(keyspace)
+				.Build();
 
-            personas = new(_session);
+            _session = _cluster.Connect();
+
+			//   ______________________________
+			//  |                              |
+			//  |   CONEXIÓN A BASE DE DATOS   |
+			//  |           **FIN**            |
+			//  |______________________________|
+			//
+
+			personas = new(_session);
             domiciliosporpersona = new(_session);
             domiciliospordepartamento = new(_session);
             domiciliosporlocalidad = new(_session);

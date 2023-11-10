@@ -5,6 +5,11 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+#Copia el Secure Connect Bundle al directorio que definamos.
+#Modificar el primer parámetro para definir el origen del Secure Connect Bundle en nuestra PC.
+#Modificar el segundo parámetro para definir el destino donde se copiará en el contenedor. Debe ser igual al BundlePath de appsettings.json.
+COPY ["DAL/Persistence/secure-connect-cass-cluster.zip", "/secure-connect-cass-cluster.zip"]
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["API/API.csproj", "API/"]
