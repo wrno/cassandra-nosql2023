@@ -11,5 +11,6 @@ namespace DAL.Repositories
     {
         bool Exists(int ci);
         Persona Create(Persona persona);
+        Task<Persona?> FindByIdentifier(int ci);
     }
 }

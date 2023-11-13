@@ -7,15 +7,15 @@ namespace Models
     {
         [PartitionKey]
         [Column("ci")]
-        public int Ci { get; set; }
+        public required int Ci { get; set; }
 
         [Column("nombre")]
-        public string Nombre { get; set; }
+        public required string Nombre { get; set; }
 
         [Column("apellido")]
-        public string Apellido { get; set; }
+        public required string Apellido { get; set; }
 
         [Column("edad")]
-        public int Edad { get; set; }
+        public required int Edad { get; set; }
     }
 }

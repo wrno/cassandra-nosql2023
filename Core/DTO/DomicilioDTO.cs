@@ -8,12 +8,12 @@ namespace Core.DTO
 {
 	public class DomicilioDTO
 	{
-		public string Departamento { get; set; }
-		public string Localidad { get; set; }
-		public string Barrio { get; set; }
-		public string Calle { get; set; }
-		public int Nro { get; set; }
-		public int? Apartamento { get; set; }
+		public required string Departamento { get; set; }
+		public required string Localidad { get; set; }
+		public required string Barrio { get; set; }
+		public required string Calle { get; set; }
+		public required int Nro { get; set; }
+		public string? Apartamento { get; set; }
 		public int? Padron { get; set; }
 		public string? Ruta { get; set; }
 		public float? Km { get; set; }

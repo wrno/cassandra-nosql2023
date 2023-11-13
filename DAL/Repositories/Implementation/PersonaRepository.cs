@@ -45,8 +45,13 @@ namespace DAL.Repositories.Implementation
             }
             else
             {
-                throw new ArgumentNullException("Debe cargar los datos de la persona.");
+                throw new ArgumentException("Debe cargar los datos de la persona.");
             }
         }
-    }
+
+		public async Task<Persona?> FindByIdentifier(int ci)
+		{
+            return await _ctx.personas.FirstOrDefault(p => p.Ci.Equals(ci)).ExecuteAsync();
+		}
+	}
 }

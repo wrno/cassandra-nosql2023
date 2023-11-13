@@ -1,68 +1,69 @@
-﻿using Cassandra.Mapping.Attributes;
+﻿using Cassandra.Mapping;
+using Cassandra.Mapping.Attributes;
 
 namespace Models
 {
     [Table("domiciliosporpersona")]
     public class DomicilioPorPersona
     {
-        [SecondaryIndex]
-        [Column("fechacreada")]
-        public DateTimeOffset FechaCreada { get; set; }
-
         [PartitionKey]
         [Column("ci")]
-        public int PersonaCi { get; set; }
+        public required int PersonaCi { get; set; }
 
-        [ClusteringKey(1)]
+		[ClusteringKey(1, SortOrder.Descending)]
+		[Column("fechacreada")]
+		public required DateTimeOffset FechaCreada { get; set; }
+
+		[ClusteringKey(2, SortOrder.Ascending)]
         [Column("departamento")]
-        public string Departamento { get; set; }
+        public required string Departamento { get; set; }
 
-        [ClusteringKey(2)]
+        [ClusteringKey(3, SortOrder.Ascending)]
         [Column("localidad")]
-        public string Localidad { get; set; }
+        public required string Localidad { get; set; }
 
-        [ClusteringKey(3)]
+        [ClusteringKey(4, SortOrder.Ascending)]
         [Column("barrio")]
-        public string Barrio { get; set; }
+        public required string Barrio { get; set; }
 
-        [ClusteringKey(4)]
+        [ClusteringKey(5, SortOrder.Ascending)]
         [Column("calle")]
-        public string Calle { get; set; }
+        public required string Calle { get; set; }
 
-        [ClusteringKey(5)]
+        [ClusteringKey(6, SortOrder.Ascending)]
         [Column("nro")]
-        public int Nro { get; set; }
+        public required int Nro { get; set; }
 
-        [ClusteringKey(6)]
+        [ClusteringKey(7, SortOrder.Ascending)]
         [Column("apartamento")]
-        public int Apartamento { get; set; }
+        public required string Apartamento { get; set; }
 
-        [ClusteringKey(7)]
+        [ClusteringKey(8, SortOrder.Ascending)]
         [Column("padron")]
-        public int Padron { get; set; }
+        public required int Padron { get; set; }
 
-        [ClusteringKey(8)]
+        [ClusteringKey(9, SortOrder.Ascending)]
         [Column("ruta")]
-        public string Ruta { get; set; }
+        public required string Ruta { get; set; }
 
-        [ClusteringKey(9)]
+        [ClusteringKey(10, SortOrder.Ascending)]
         [Column("km")]
-        public float Km { get; set; }
+        public required float Km { get; set; }
 
-        [ClusteringKey(10)]
+        [ClusteringKey(11, SortOrder.Ascending)]
         [Column("letra")]
-        public string Letra { get; set; }
+        public required string Letra { get; set; }
 
-        [StaticColumn]
+		[StaticColumn]
         [Column("nombre")]
-        public string PersonaNombre { get; set; }
+        public required string PersonaNombre { get; set; }
 
         [StaticColumn]
         [Column("apellido")]
-        public string PersonaApellido { get; set; }
+        public required string PersonaApellido { get; set; }
 
         [StaticColumn]
         [Column("edad")]
-        public string PersonaEdad { get; set; }
+        public required int PersonaEdad { get; set; }
     }
 }

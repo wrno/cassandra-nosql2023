@@ -72,7 +72,7 @@ namespace BLL.Services.Implementation
             }
             else
             {
-                throw new ArgumentNullException("Debe cargar los datos de la persona.");
+                throw new ArgumentException("Debe cargar los datos de la persona.");
             }
         }
     }

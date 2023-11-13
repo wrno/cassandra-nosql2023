@@ -1,7 +1,11 @@
 ﻿using BLL.Services;
 using Core.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Text;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +26,11 @@ namespace API.Controllers
 
         // POST api/<DomicilioController>
         [HttpPost]
-        public ActionResult<DomicilioPersonaDTO> AgregarDomicilio([Required] NuevoDomicilioDTO domicilio)
+        public async Task<ActionResult<DomicilioPersonaDTO>> AgregarDomicilio([Required] NuevoDomicilioDTO domicilio)
         {
             if (_personaService.Existe(domicilio.Ci))
             {
-                return _domicilioService.AgregarDomicilio(domicilio);
+                return StatusCode(StatusCodes.Status200OK, await _domicilioService.AgregarDomicilio(domicilio));
             }
             else
 			{
@@ -36,16 +40,40 @@ namespace API.Controllers
 
         // GET api/<DomicilioController>/persona/{ci}
         [HttpGet("persona/{ci}")]
-        public async Task<ActionResult<List<DomicilioPersonaDTO>>> ConsultarDomicilio(
+        public ActionResult<List<DomicilioPersonaDTO>> ConsultarDomicilio(
             [Required]
-            [Range(10000000, int.MaxValue, ErrorMessage = "Cédula inválida.")]
-            int ci, 
-            int? skip, 
-            int? count)
+            [Range(10000000, 99999999, ErrorMessage = "Cédula inválida.")]
+            int ci,
+			int? limit)
         {
             if (_personaService.Existe(ci))
             {
-                return await _domicilioService.ConsultarDomicilio(ci, skip, count);
+                byte[]? pagingState = null;
+                string? pagingStateString = Request.Headers["X-PagingState"].FirstOrDefault();
+
+				if (pagingStateString != null)
+				{
+                    int NumberChars = pagingStateString.Length;
+					pagingState = new byte[NumberChars / 2];
+                    for (int i = 0; i < NumberChars; i += 2)
+                    {
+                        pagingState[i / 2] = Convert.ToByte(pagingStateString.Substring(i, 2), 16);
+                    }
+				}
+
+				List<DomicilioPersonaDTO> domicilios = _domicilioService.ConsultarDomicilio(ci, limit, ref pagingState);
+
+                if (pagingState != null)
+				{
+                    StringBuilder stringBuilder = new StringBuilder(pagingState.Length * 2);
+                    foreach(byte b in pagingState)
+                    {
+                        stringBuilder.AppendFormat("{0:x2}", b);
+                    }
+					Response.Headers.Add("X-PagingState", stringBuilder.ToString());
+                }
+
+				return StatusCode(StatusCodes.Status200OK, domicilios);
             }
             else
 			{

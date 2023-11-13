@@ -23,9 +23,7 @@ namespace Core.DTO
         [Required(ErrorMessage = "El número de calle es obligatorio. Si no tiene número de calle, ingrese cero.")]
         [Range(0, int.MaxValue, ErrorMessage = "El número de calle debe ser mayor o igual a cero.")]
         public required int Nro { get; set; }
-
-        [Range(0, int.MaxValue, ErrorMessage = "El número de apartamento debe ser mayor o igual a cero.")]
-        public int? Apartamento { get; set; }
+        public string? Apartamento { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "El padrón debe ser mayor o igual a cero.")]
         public int? Padron { get; set; }

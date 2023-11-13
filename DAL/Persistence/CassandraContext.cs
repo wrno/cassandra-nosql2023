@@ -2,6 +2,7 @@
 using Cassandra.Data.Linq;
 using Cassandra.Mapping;
 using Cassandra.Mapping.Attributes;
+using Core.Enums;
 using Microsoft.Extensions.Configuration;
 using Models;
 using System;
@@ -37,44 +38,47 @@ namespace DAL.Persistence
             _configuration = configuration;
             string? keyspace = _configuration.GetSection("AppSettings:Cassandra:Keyspace").Value;
 
-			//   ______________________________
-			//  |                              |
-			//  |   CONEXIÓN A BASE DE DATOS   |
-			//  |          **INICIO**          |
-			//  |______________________________|
-			//
+            //   ______________________________
+            //  |                              |
+            //  |   CONEXIÓN A BASE DE DATOS   |
+            //  |          **INICIO**          |
+            //  |______________________________|
+            //
 
-			// USAR SI SE CONECTA A LOCALHOST:
+            string? enumDocker = Enum.GetName(typeof(Deployment), Deployment.Docker);
+			if (enumDocker != null && enumDocker.Equals(_configuration.GetSection("AppSettings:Cassandra:Deployment").Value))
+            {
+                // SE CONECTA SEGÚN CONFIGURACIÓN DE DOCKER:
+                string? username = _configuration.GetSection("AppSettings:Cassandra:Username").Value;
+                string? password = _configuration.GetSection("AppSettings:Cassandra:Password").Value;
+                string? contactPoint = _configuration.GetSection("AppSettings:Cassandra:ContactPoint").Value;
+                string? portString = _configuration.GetSection("AppSettings:Cassandra:Port").Value;
+				_ = int.TryParse(portString, out int port);
 
-			//string? username = _configuration.GetSection("AppSettings:Cassandra:Username").Value;
-			//string? password = _configuration.GetSection("AppSettings:Cassandra:Password").Value;
-			//string? contactPoint = _configuration.GetSection("AppSettings:Cassandra:ContactPoint").Value;
-			//string? portString = _configuration.GetSection("AppSettings:Cassandra:Port").Value;
-			//int.TryParse(portString, out int port);
+                _cluster = Cluster.Builder()
+                    .WithCredentials(username, password)
+                    .AddContactPoint(contactPoint)
+                    .WithPort(port)
+                    .WithDefaultKeyspace(keyspace)
+                    .Build();
 
-			//_cluster = Cluster.Builder()
-			//    .WithCredentials(username, password)
-			//    .AddContactPoint(contactPoint)
-			//    .WithPort(port)
-			//    .WithDefaultKeyspace(keyspace)
-			//    .Build();
+                _session = _cluster.ConnectAndCreateDefaultKeyspaceIfNotExists();
+            }
+            else
+            {
+				// SE CONECTA A DATASTAX ASTRA DB:
+				string? bundle = _configuration.GetSection("AppSettings:Cassandra:BundlePath").Value;
+				string? client = _configuration.GetSection("AppSettings:Cassandra:ClientId").Value;
+				string? secret = _configuration.GetSection("AppSettings:Cassandra:ClientSecret").Value;
 
-			//_session = _cluster.ConnectAndCreateDefaultKeyspaceIfNotExists();
+				_cluster = Cluster.Builder()
+					.WithCloudSecureConnectionBundle(bundle)
+					.WithCredentials(client, secret)
+					.WithDefaultKeyspace(keyspace)
+					.Build();
 
-
-			// USAR SI SE CONECTA A DATASTAX ASTRA DB:
-
-			string? bundle = _configuration.GetSection("AppSettings:Cassandra:BundlePath").Value;
-            string? client = _configuration.GetSection("AppSettings:Cassandra:ClientId").Value;
-            string? secret = _configuration.GetSection("AppSettings:Cassandra:ClientSecret").Value;
-
-            _cluster = Cluster.Builder()
-                .WithCloudSecureConnectionBundle(bundle)
-                .WithCredentials(client, secret)
-				.WithDefaultKeyspace(keyspace)
-				.Build();
-
-            _session = _cluster.Connect();
+				_session = _cluster.Connect();
+			}
 
 			//   ______________________________
 			//  |                              |

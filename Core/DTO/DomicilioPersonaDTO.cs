@@ -4,14 +4,17 @@ namespace Core.DTO
 {
     public class DomicilioPersonaDTO
     {
-        public DateTime FechaCreada { get; set; }
-        public int Ci { get; set; }
-        public string Departamento { get; set; }
-        public string Localidad { get; set; }
-        public string Barrio { get; set; }
-        public string Calle { get; set; }
-        public int Nro { get; set; }
-        public int? Apartamento { get; set; }
+        public required DateTimeOffset FechaCreada { get; set; }
+        public required int Ci { get; set; }
+        public required string Nombre { get; set; }
+        public required string Apellido { get; set; }
+        public required int Edad { get; set; }
+        public required string Departamento { get; set; }
+        public required string Localidad { get; set; }
+        public required string Barrio { get; set; }
+        public required string Calle { get; set; }
+        public required int Nro { get; set; }
+        public string? Apartamento { get; set; }
         public int? Padron { get; set; }
         public string? Ruta { get; set; }
         public float? Km { get; set; }

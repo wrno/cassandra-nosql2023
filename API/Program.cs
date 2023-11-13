@@ -1,3 +1,4 @@
+using API.Swagger;
 using BLL.Services;
 using BLL.Services.Implementation;
 using DAL.Persistence;
@@ -6,6 +7,8 @@ using DAL.Repositories.Implementation;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCustomSwaggerGen();
 
 // DbContext
 builder.Services.AddSingleton<CassandraContext>();
@@ -19,7 +22,7 @@ builder.Services.AddScoped<IPersonaService, PersonaService>();
 builder.Services.AddScoped<IDomicilioService, DomicilioService>();
 
 // Add services to the container.
-builder.Services.AddAutoMapper(Assembly.Load(nameof(BLL)));
+builder.Services.AddAutoMapper(Assembly.Load(nameof(Models)));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +34,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+	app.AddCustomSwaggerUI();
 }
 
 app.UseHttpsRedirection();
