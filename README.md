@@ -102,9 +102,6 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | ruta         | text      |  **C↑** |
 | km           | float     |  **C↑** |
 | letra        | text      |  **C↑** |
-| nombre       | text      |  **S**  |
-| apellido     | text      |  **S**  |
-| edad         | int       |  **S**  |
 
 ### domiciliosporlocalidad
 | Columna      | Tipo  | Índice |
