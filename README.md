@@ -73,6 +73,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | Columna      | Tipo      | Índice  |
 |--------------|-----------|:-------:|
 | ci           | int       |  **K**  |
+| fechacreada  | timestamp |  **C↓** |
 | departamento | text      |  **C↑** |
 | localidad    | text      |  **C↑** |
 | barrio       | text      |  **C↑** |
@@ -86,13 +87,11 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | nombre       | text      |  **S**  |
 | apellido     | text      |  **S**  |
 | edad         | int       |  **S**  |
-| fechacreada  | timestamp | **IDX** |
 
 ### domiciliospordepartamento
 | Columna      | Tipo      | Índice  |
 |--------------|-----------|:-------:|
 | ci           | int       |  **K**  |
-| fechacreada  | timestamp |  **C↓** |
 | departamento | text      |  **C↑** |
 | localidad    | text      |  **C↑** |
 | barrio       | text      |  **C↑** |
