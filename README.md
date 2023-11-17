@@ -79,7 +79,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | barrio       | text      |  **C↑** |
 | calle        | text      |  **C↑** |
 | nro          | int       |  **C↑** |
-| apartamento  | int       |  **C↑** |
+| apartamento  | text      |  **C↑** |
 | padron       | int       |  **C↑** |
 | ruta         | text      |  **C↑** |
 | km           | float     |  **C↑** |
@@ -97,7 +97,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | barrio       | text      |  **C↑** |
 | calle        | text      |  **C↑** |
 | nro          | int       |  **C↑** |
-| apartamento  | int       |  **C↑** |
+| apartamento  | text      |  **C↑** |
 | padron       | int       |  **C↑** |
 | ruta         | text      |  **C↑** |
 | km           | float     |  **C↑** |
@@ -111,7 +111,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | barrio       | text  | **C↑** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
-| apartamento  | int   | **C↑** |
+| apartamento  | text  | **C↑** |
 | padron       | int   | **C↑** |
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
@@ -125,7 +125,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | localidad    | text  | **C↑** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
-| apartamento  | int   | **C↑** |
+| apartamento  | text  | **C↑** |
 | padron       | int   | **C↑** |
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
@@ -139,7 +139,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | barrio       | text  | **C↑** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
-| apartamento  | int   | **C↑** |
+| apartamento  | text  | **C↑** |
 | padron       | int   | **C↑** |
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
@@ -153,7 +153,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | localidad    | text  | **C↑** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
-| apartamento  | int   | **C↑** |
+| apartamento  | text  | **C↑** |
 | padron       | int   | **C↑** |
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
@@ -167,7 +167,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | departamento | text  | **C↑** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
-| apartamento  | int   | **C↑** |
+| apartamento  | text  | **C↑** |
 | padron       | int   | **C↑** |
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
@@ -181,7 +181,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | barrio       | text  |  **K** |
 | calle        | text  | **C↑** |
 | nro          | int   | **C↑** |
-| apartamento  | int   | **C↑** |
+| apartamento  | text  | **C↑** |
 | padron       | int   | **C↑** |
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
