@@ -12,5 +12,6 @@ namespace DAL.Repositories
 	{
 		DomicilioPorPersona Create(DomicilioPorPersona domicilio);
 		List<DomicilioPorPersona> GetAllDomiciliosByPersona(int ci, int? limit, ref byte[]? pagingState);
-	}
+        List<DomicilioPorDepartamento> GetAllDomiciliosPorDepartamento(string departamento);
+    }
 }

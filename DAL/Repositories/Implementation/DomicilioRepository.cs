@@ -72,5 +72,11 @@ namespace DAL.Repositories.Implementation
 				return query.Execute().ToList();
 			}
 		}
-	}
+
+        public List<DomicilioPorDepartamento> GetAllDomiciliosPorDepartamento(string departamento)
+        {
+            CqlQuery<DomicilioPorDepartamento> query = _ctx.domiciliospordepartamento.Where(p=>p.Departamento.Equals(departamento));
+			return query.Execute().ToList();
+        }
+    }
 }

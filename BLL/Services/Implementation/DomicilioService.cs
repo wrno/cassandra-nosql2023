@@ -102,12 +102,19 @@ namespace BLL.Services.Implementation
 			return _mapper.Map<List<DomicilioPersonaDTO>>(_domicilioRepository.GetAllDomiciliosByPersona(ci, limit, ref pagingState));
 		}
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamento(string departamento)
+		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamento(string departamento)
 		{
-			throw new NotImplementedException();
+			if (departamento != null)
+			{
+				return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorDepartamento(departamento));
+			}
+			else
+			{
+				throw new ArgumentException("Debe especificar un departamento.");
+			}
 		}
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidad(string localidad)
+        public Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidad(string localidad)
 		{
 			throw new NotImplementedException();
 		}
