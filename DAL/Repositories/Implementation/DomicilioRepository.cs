@@ -73,10 +73,22 @@ namespace DAL.Repositories.Implementation
 			}
 		}
 
+        public List<DomicilioPorBarrio> GetAllDomiciliosPorBarrio(string barrio)
+        {
+            CqlQuery<DomicilioPorBarrio> query = _ctx.domiciliosporbarrio.Where(p => p.Barrio.Equals(barrio));
+            return query.Execute().ToList();
+        }
+
         public List<DomicilioPorDepartamento> GetAllDomiciliosPorDepartamento(string departamento)
         {
             CqlQuery<DomicilioPorDepartamento> query = _ctx.domiciliospordepartamento.Where(p=>p.Departamento.Equals(departamento));
 			return query.Execute().ToList();
+        }
+
+        public List<DomicilioPorLocalidad> GetAllDomiciliosPorLocalidad(string localidad)
+        {
+            CqlQuery<DomicilioPorLocalidad> query = _ctx.domiciliosporlocalidad.Where(p => p.Localidad.Equals(localidad));
+            return query.Execute().ToList();
         }
     }
 }

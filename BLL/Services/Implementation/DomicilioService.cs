@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BLL.Services.Implementation
@@ -104,7 +105,7 @@ namespace BLL.Services.Implementation
 
 		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamento(string departamento)
 		{
-			if (departamento != null)
+			if (departamento != null && departamento != "")
 			{
 				return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorDepartamento(departamento));
 			}
@@ -114,15 +115,29 @@ namespace BLL.Services.Implementation
 			}
 		}
 
-        public Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidad(string localidad)
+        public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidad(string localidad)
 		{
-			throw new NotImplementedException();
-		}
+            if (localidad != null && localidad != "")
+            {
+                return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorLocalidad(localidad));
+            }
+            else
+            {
+                throw new ArgumentException("Debe especificar una localidad.");
+            }
+        }
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorBarrio(string barrio)
+		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorBarrio(string barrio)
 		{
-			throw new NotImplementedException();
-		}
+            if (barrio != null && barrio != "")
+            {
+                return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorBarrio(barrio));
+            }
+            else
+            {
+                throw new ArgumentException("Debe especificar un barrio.");
+            }
+        }
 
 		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidad(string departamento, string localidad)
 		{
