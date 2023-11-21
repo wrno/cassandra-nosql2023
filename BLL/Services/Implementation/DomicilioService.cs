@@ -139,24 +139,52 @@ namespace BLL.Services.Implementation
             }
         }
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidad(string departamento, string localidad)
+		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidad(string departamento, string localidad)
 		{
-			throw new NotImplementedException();
-		}
+            if ((localidad != null && localidad != "") && (departamento != null && departamento != ""))
+            {
+                return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorDepartamentoLocalidad(departamento,localidad));
+            }
+            else
+            {
+                throw new ArgumentException("Debe especificar una localidad y departamento.");
+            }
+        }
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoBarrio(string departamento, string barrio)
+		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoBarrio(string departamento, string barrio)
 		{
-			throw new NotImplementedException();
-		}
+            if ((barrio != null && barrio != "") && (departamento != null && departamento != ""))
+            {
+                return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorDepartamentoBarrio(departamento, barrio));
+            }
+            else
+            {
+                throw new ArgumentException("Debe especificar una departamento y barrio.");
+            }
+        }
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidadBarrio(string localidad, string barrio)
+		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorLocalidadBarrio(string localidad, string barrio)
 		{
-			throw new NotImplementedException();
-		}
+            if ((barrio != null && barrio != "") && (localidad != null && localidad != ""))
+            {
+                return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorLocalidadBarrio(localidad, barrio));
+            }
+            else
+            {
+                throw new ArgumentException("Debe especificar una localidad y barrio.");
+            }
+        }
 
-		public Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidadBarrio(string departamento, string localidad, string barrio)
+		public async Task<List<DomicilioDTO>> ConsultarDomiciliosPorDepartamentoLocalidadBarrio(string departamento, string localidad, string barrio)
 		{
-			throw new NotImplementedException();
-		}
+            if ((barrio != null && barrio != "") && (localidad != null && localidad != "") && (departamento != null && departamento != ""))
+            {
+                return _mapper.Map<List<DomicilioDTO>>(_domicilioRepository.GetAllDomiciliosPorDepartamentoLocalidadBarrio(localidad, barrio, departamento));
+            }
+            else
+            {
+                throw new ArgumentException("Debe especificar al menos un criterio.");
+            }
+        }
 	}
 }

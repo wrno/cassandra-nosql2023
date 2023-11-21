@@ -90,5 +90,29 @@ namespace DAL.Repositories.Implementation
             CqlQuery<DomicilioPorLocalidad> query = _ctx.domiciliosporlocalidad.Where(p => p.Localidad.Equals(localidad));
             return query.Execute().ToList();
         }
+
+        public List<DomicilioPorDepartamentoLocalidad> GetAllDomiciliosPorDepartamentoLocalidad(string departamento, string? localidad)
+        {
+            CqlQuery<DomicilioPorDepartamentoLocalidad> query = _ctx.domiciliospordepartamentolocalidad.Where(p => p.Localidad.Equals(localidad)).Where(p => p.Departamento.Equals(departamento));
+            return query.Execute().ToList();
+        }
+
+        public List<DomicilioPorDepartamentoBarrio> GetAllDomiciliosPorDepartamentoBarrio(string departamento, string? barrio)
+        {
+            CqlQuery<DomicilioPorDepartamentoBarrio> query = _ctx.domiciliospordepartamentobarrio.Where(p => p.Departamento.Equals(departamento)).Where(p => p.Barrio.Equals(barrio));
+            return query.Execute().ToList();
+        }
+
+        public List<DomicilioPorLocalidadBarrio> GetAllDomiciliosPorLocalidadBarrio(string localidad, string? barrio)
+        {
+            CqlQuery<DomicilioPorLocalidadBarrio> query = _ctx.domiciliosporlocalidadbarrio.Where(p => p.Localidad.Equals(localidad)).Where(p => p.Barrio.Equals(barrio));
+            return query.Execute().ToList();
+        }
+
+        public List<DomicilioPorDepartamentoLocalidadBarrio> GetAllDomiciliosPorDepartamentoLocalidadBarrio(string localidad, string barrio, string departamento)
+        {
+            CqlQuery<DomicilioPorDepartamentoLocalidadBarrio> query = _ctx.domiciliospordepartamentolocalidadbarrio.Where(p => p.Localidad.Equals(localidad)).Where(p => p.Barrio.Equals(barrio)).Where(p => p.Departamento.Equals(departamento));
+            return query.Execute().ToList();
+        }
     }
 }

@@ -15,5 +15,9 @@ namespace DAL.Repositories
         List<DomicilioPorBarrio> GetAllDomiciliosPorBarrio(string barrio);
         List<DomicilioPorDepartamento> GetAllDomiciliosPorDepartamento(string departamento);
         List<DomicilioPorLocalidad> GetAllDomiciliosPorLocalidad(string localidad);
+        List<DomicilioPorDepartamentoLocalidad> GetAllDomiciliosPorDepartamentoLocalidad(string departamento, string? localidad);
+        List<DomicilioPorDepartamentoBarrio> GetAllDomiciliosPorDepartamentoBarrio(string departamento, string? barrio);
+        List<DomicilioPorLocalidadBarrio> GetAllDomiciliosPorLocalidadBarrio(string localidad, string? barrio);
+        List<DomicilioPorDepartamentoLocalidadBarrio> GetAllDomiciliosPorDepartamentoLocalidadBarrio(string localidad, string barrio, string departamento);
     }
 }
