@@ -31,6 +31,7 @@ Herramientas utilizadas
 - La solución fue desarrollada en **.NET** usando **C#** como lenguaje de programación.
 - Los datos se almacenan en una base de datos **Apache Cassandra**.
 - Tanto la base de datos como el sistema se despliegan utilizando **Docker**.
+- La base de datos, opcionalmente, se puede desplegar en **DataStax Astra**.
 - Para la conexión con la base de datos Apache Cassandra desde nuestra aplicación desarrollada en C#, se utiliza el driver **CassandraCSharpDriver** desarrollado por DataStax.
 
 ¿Por qué Cassandra?
@@ -220,14 +221,21 @@ Para instalar la imagen de Cassandra en Docker, tiene dos opciones:
 Configurar la aplicación
 -------------------------
 Modificar **`API/appsettings.json`** según las necesidades:
+- ***AppSettings:Cassandra:Deployment*** puede tomar los valores "Docker" o "Astra" (que se encuentran en *Core.Enums.Deployment*) e indica dónde se encuentra la base de datos a la que nos conectamos.
 - ***AppSettings:Cassandra:Username*** es el nombre de usuario con el cual se conecta al contenedor de Cassandra.
 - ***AppSettings:Cassandra:Password*** es la contraseña con la cual se conecta al contenedor de Cassandra.
 - ***AppSettings:Cassandra:ContactPoint*** es la IP a través de la cual se accede a Cassandra.
 - ***AppSettings:Cassandra:Port*** es el puerto en el que se mapeó el puerto 9042 de Cassandra.
 - ***AppSettings:Cassandra:Keyspace*** es el nombre del keyspace en el cual guardaremos los datos.
+- ***AppSettings:Cassandra:BundlePath*** es el path en el que se despliega en el contenedor el archivo *secure-connect-**[nombre-de-BD-en-Astra]**.zip* que devuelve Astra. Esto se configura en el Dockerfile.
+- ***AppSettings:Cassandra:ClientId*** es equivalente al valor *clientId* en el archivo ***[nombre-de-BD-en-Astra]**-token.json* que devuelve Astra.
+- ***AppSettings:Cassandra:ClientSecret*** es equivalente al valor *secret* en el archivo ***[nombre-de-BD-en-Astra]**-token.json* que devuelve Astra.
+
+Si se usa base de datos en Astra, modificar **`API/Dockerfile`**: </br>
+La línea `COPY ["DAL/Persistence/secure-connect-cass-cluster.zip", "/secure-connect-cass-cluster.zip"]` copia el archivo *secure-connect-**[nombre-de-BD-en-Astra]**.zip* en la carpeta `DAL/Persistence` al contenedor en el directorio raíz con mismo nombre. Este último parámetro debe ser igual al valor definido en ***AppSettings:Cassandra:BundlePath*** en `API/appsettings.json`.
 
 #### IMPORTANTE
-Es posible que al intentar conectarse a la IP especificada (sea `127.0.0.1`, `localhost` o cual sea) en el `docker run` no sea suficiente para llegar al contenedor de Cassandra. En ese caso, seguir los siguientes pasos:
+Si se usa base de datos en Docker, es posible que al intentar conectarse a la IP especificada (sea `127.0.0.1`, `localhost` o cual sea) en el `docker run` no sea suficiente para llegar al contenedor de Cassandra. En ese caso, seguir los siguientes pasos:
 1. **Con Docker Desktop**
     - Seleccione el contenedor.
     - Clic en *Exec*.
