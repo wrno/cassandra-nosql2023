@@ -30,6 +30,7 @@ Tabla de contenidos
    2. [api/Domicilio: POST](#apidomicilio-post)
    3. [api/Domicilio/persona/{ci}: GET](#apidomiciliopersonaci-get)
    4. [api/Domicilio: GET](#apidomicilio-get)
+8. [Pruebas](#pruebas)
 
 Grupo
 -----
@@ -40,10 +41,11 @@ Grupo
 Herramientas utilizadas
 -----------------------
 - La solución fue desarrollada en **.NET 7** usando **C#** como lenguaje de programación.
-- Los datos se almacenan en una base de datos **Apache Cassandra**.
+- Los datos se almacenan en una base de datos **Apache Cassandra 4.1**.
 - Tanto la base de datos como el sistema se despliegan utilizando **Docker**.
 - La base de datos, opcionalmente, se puede desplegar en **DataStax Astra**.
 - Para la conexión con la base de datos Apache Cassandra desde nuestra aplicación desarrollada en C#, se utiliza el driver **CassandraCSharpDriver** desarrollado por DataStax.
+- Para realizar pruebas, se utilizaron **Swagger UI**, **Postman API** y **Apache JMeter 5.6**.
 
 ¿Por qué Cassandra?
 -------------------
@@ -351,3 +353,10 @@ Obtiene todos los domicilios asociados a un criterio de búsqueda, que puede ser
   - *barrio*: Barrio. Query param. Opcional.
 - Devuelve:
   - Lista de *DomicilioDTO*: Colección de JSONs.
+
+Pruebas
+-------
+Para realizar las pruebas con:
+- **Swagger UI:** Ir a `https://[ip-o-dominio]:[puerto]/swagger/index.html`.
+- **Postman API:** Importar el archivo `Pruebas/Postman/Taller NoSQL.postman_collection.json` como colección y guiarse por la documentación para realizar modificaciones en los distintos *requests* cambiando IP/dominio y puerto por el correspondiente.
+- **Apache JMeter:** Abrir el archivo `Pruebas/jmeterTEST/pruebasCassandraProy.jmx` en Apache JMeter cambiando IP/dominio y puerto por el correspondiente en cada una de las pruebas.
