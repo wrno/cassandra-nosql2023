@@ -8,17 +8,28 @@ Tabla de contenidos
 2. [Herramientas utilizadas](#herramientas-utilizadas)
 3. [¿Por qué Cassandra?](#por-qué-cassandra)
 4. [Modelado de datos](#modelado-de-datos)
-   1. [personas](#personas)
-   2. [domiciliosporpersona](#domiciliosporpersona)
-   3. [domiciliospordepartamento](#domiciliospordepartamento)
-   4. [domiciliosporlocalidad](#domiciliosporlocalidad)
-   5. [domiciliosporbarrio](#domiciliosporbarrio)
-   6. [domiciliospordepartamentolocalidad](#domiciliospordepartamentolocalidad)
-   7. [domiciliospordepartamentobarrio](#domiciliospordepartamentobarrio)
-   8. [domiciliosporlocalidadbarrio](#domiciliosporlocalidadbarrio)
-   9. [domiciliospordepartamentolocalidadbarrio](#domiciliospordepartamentolocalidadbarrio)
+   1. [Tablas](#tablas)
+      1. [personas](#personas)
+      2. [domiciliosporpersona](#domiciliosporpersona)
+      3. [domiciliospordepartamento](#domiciliospordepartamento)
+      4. [domiciliosporlocalidad](#domiciliosporlocalidad)
+      5. [domiciliosporbarrio](#domiciliosporbarrio)
+      6. [domiciliospordepartamentolocalidad](#domiciliospordepartamentolocalidad)
+      7. [domiciliospordepartamentobarrio](#domiciliospordepartamentobarrio)
+      8. [domiciliosporlocalidadbarrio](#domiciliosporlocalidadbarrio)
+      9. [domiciliospordepartamentolocalidadbarrio](#domiciliospordepartamentolocalidadbarrio)
+   2. [Data Type Objects](#data-type-objects)
+      1. [PersonaDTO](#personadto)
+      2. [NuevoDomicilioDTO](#nuevodomiciliodto)
+      3. [DomicilioPersonaDTO](#domiciliopersonadto)
+      4. [DomicilioDTO](#domiciliodto)
 5. [Instalar Cassandra con Docker en Windows](#instalar-cassandra-con-docker-en-windows)
 6. [Configurar la aplicación](#configurar-la-aplicación)
+7. [Servicios](#servicios)
+   1. [api/Persona: POST](#api-Persona-POST)
+   2. [api/Domicilio: POST](#api-Domicilio-POST)
+   3. [api/Domicilio/persona/{ci}: GET](#api-Domicilio-persona-ci-GET)
+   4. [api/Domicilio: GET](#api-Domicilio-GET)
 
 Grupo
 -----
@@ -28,7 +39,7 @@ Grupo
 
 Herramientas utilizadas
 -----------------------
-- La solución fue desarrollada en **.NET** usando **C#** como lenguaje de programación.
+- La solución fue desarrollada en **.NET 7** usando **C#** como lenguaje de programación.
 - Los datos se almacenan en una base de datos **Apache Cassandra**.
 - Tanto la base de datos como el sistema se despliegan utilizando **Docker**.
 - La base de datos, opcionalmente, se puede desplegar en **DataStax Astra**.
@@ -51,7 +62,8 @@ Sabiendo que estas son las únicas consultas que se pueden realizar, que en todo
 
 Modelado de datos
 -----------------
-#### Referencias
+### Tablas
+##### Referencias
 |  Clave  | Significado                      |
 |:-------:|----------------------------------|
 |  **K**  | Clave de partición               |
@@ -62,7 +74,7 @@ Modelado de datos
 
 Se debe generar una tabla por cada consulta que definimos en el punto anterior. De esta forma, se generan las siguientes tablas en Apache Cassandra:
 
-### personas
+#### personas
 | Columna  | Tipo | Índice |
 |----------|------|:------:|
 | ci       | int  |  **K** |
@@ -70,7 +82,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | apellido | text |        |
 | edad     | int  |        |
 
-### domiciliosporpersona
+#### domiciliosporpersona
 | Columna      | Tipo      | Índice  |
 |--------------|-----------|:-------:|
 | ci           | int       |  **K**  |
@@ -89,7 +101,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | apellido     | text      |  **S**  |
 | edad         | int       |  **S**  |
 
-### domiciliospordepartamento
+#### domiciliospordepartamento
 | Columna      | Tipo      | Índice  |
 |--------------|-----------|:-------:|
 | ci           | int       |  **K**  |
@@ -104,7 +116,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | km           | float     |  **C↑** |
 | letra        | text      |  **C↑** |
 
-### domiciliosporlocalidad
+#### domiciliosporlocalidad
 | Columna      | Tipo  | Índice |
 |--------------|-------|:------:|
 | localidad    | text  |  **K** |
@@ -118,7 +130,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | km           | float | **C↑** |
 | letra        | text  | **C↑** |
 
-### domiciliosporbarrio
+#### domiciliosporbarrio
 | Columna      | Tipo  | Índice |
 |--------------|-------|:------:|
 | barrio       | text  |  **K** |
@@ -132,7 +144,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | km           | float | **C↑** |
 | letra        | text  | **C↑** |
 
-### domiciliospordepartamentolocalidad
+#### domiciliospordepartamentolocalidad
 | Columna      | Tipo  | Índice |
 |--------------|-------|:------:|
 | departamento | text  |  **K** |
@@ -146,7 +158,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | km           | float | **C↑** |
 | letra        | text  | **C↑** |
 
-### domiciliospordepartamentobarrio
+#### domiciliospordepartamentobarrio
 | Columna      | Tipo  | Índice |
 |--------------|-------|:------:|
 | departamento | text  |  **K** |
@@ -160,7 +172,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | km           | float | **C↑** |
 | letra        | text  | **C↑** |
 
-### domiciliosporlocalidadbarrio
+#### domiciliosporlocalidadbarrio
 | Columna      | Tipo  | Índice |
 |--------------|-------|:------:|
 | localidad    | text  |  **K** |
@@ -174,7 +186,7 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | km           | float | **C↑** |
 | letra        | text  | **C↑** |
 
-### domiciliospordepartamentolocalidadbarrio
+#### domiciliospordepartamentolocalidadbarrio
 | Columna      | Tipo  | Índice |
 |--------------|-------|:------:|
 | departamento | text  |  **K** |
@@ -187,6 +199,64 @@ Se debe generar una tabla por cada consulta que definimos en el punto anterior. 
 | ruta         | text  | **C↑** |
 | km           | float | **C↑** |
 | letra        | text  | **C↑** |
+
+### Data Type Objects
+
+#### PersonaDTO
+| Columna  | Tipo   | Chequeos                                                |
+|----------|--------|---------------------------------------------------------|
+| Ci       | int    | - Requerido </br> - Mín: 10000000 </br> - Máx: 99999999 |
+| Nombre   | string | - Requerido                                             |
+| Apellido | string | - Requerido                                             |
+| Edad     | int    | - Requerido </br> - Mín: 0                              |
+
+#### NuevoDomicilioDTO
+| Columna      | Tipo   | Chequeos                                                |
+|--------------|--------|---------------------------------------------------------|
+| Ci           | int    | - Requerido </br> - Mín: 10000000 </br> - Máx: 99999999 |
+| Departamento | string | - Requerido                                             |
+| Localidad    | string | - Requerido                                             |
+| Barrio       | string | - Requerido                                             |
+| Calle        | string | - Requerido                                             |
+| Nro          | int    | - Requerido (0 en caso de ser S/N) </br> - Mín: 0       |
+| Apartamento  | string |                                                         |
+| Padron       | int    | - Mín: 0                                                |
+| Ruta         | string |                                                         |
+| Km           | float  | - Mín: 0                                                |
+| Letra        | string |                                                         |
+
+#### DomicilioPersonaDTO
+| Columna      | Tipo           | Chequeos    |
+|--------------|----------------|-------------|
+| FechaCreada  | DateTimeOffset | - Requerido |
+| Ci           | int            | - Requerido |
+| Nombre       | string         | - Requerido |
+| Apellido     | string         | - Requerido |
+| Edad         | int            | - Requerido |
+| Departamento | string         | - Requerido |
+| Localidad    | string         | - Requerido |
+| Barrio       | string         | - Requerido |
+| Calle        | string         | - Requerido |
+| Nro          | int            | - Requerido |
+| Apartamento  | string         |             |
+| Padron       | int            |             |
+| Ruta         | string         |             |
+| Km           | float          |             |
+| Letra        | string         |             |
+
+#### DomicilioDTO
+| Columna      | Tipo   | Chequeos    |
+|--------------|--------|-------------|
+| Departamento | string | - Requerido |
+| Localidad    | string | - Requerido |
+| Barrio       | string | - Requerido |
+| Calle        | string | - Requerido |
+| Nro          | int    | - Requerido |
+| Apartamento  | string |             |
+| Padron       | int    |             |
+| Ruta         | string |             |
+| Km           | float  |             |
+| Letra        | string |             |
 
 Instalar Cassandra con Docker en Windows
 ----------------------------------------
@@ -246,3 +316,38 @@ Si se usa base de datos en Docker, es posible que al intentar conectarse a la IP
 Una vez llegados a este punto, independientemente de qué herramienta uso, siga los siguientes pasos:
 - Ejecute el siguiente comando: `SELECT listen_address FROM system.local;`
 - Use la IP devuelta como *contact point* en `API/appsettings.json`.
+
+Servicios
+---------
+### api/Persona: POST
+Agrega una persona que no existe en el sistema, se pasa como parámetro un objeto de tipo persona. En caso de la persona existir ya en el sistema (la CI pertenece a una persona que está en la base) se retorna el error 401 con el mensaje: "La persona ya existe".
+- Recibe:
+  - *PersonaDTO*: JSON en body. Requerido.
+- Devuelve:
+  - *PersonaDTO*: JSON.
+
+### api/Domicilio: POST
+Agrega una dirección asociada a una persona. Se pasa como parámetro la cédula de la persona y un objeto de dirección. Si la persona (cédula) no existe en el sistema, se retorna el error 402 con el mensaje: "No existe una persona con la cédula aportada como parámetro".
+- Recibe:
+  - *NuevoDomicilioDTO*: JSON en body. Requerido.
+- Devuelve:
+  - *DomicilioPersonaDTO*: JSON.
+
+### api/Domicilio/persona/{ci}: GET
+Obtiene todas las direcciones asociadas a una persona. Se pasa como parámetro la cédula de la persona. Las direcciones se listan de forma tal que las últimas ingresadas se muestran primero. Este endpoint debe ofrecer la posibilidad de obtener los resultados de forma paginada. Si la persona (cédula) no existe en el sistema, se retorna el error 402 con el mensaje: "No existe una persona con la cédula aportada como parámetro".
+- Recibe:
+  - *ci*: Cédula de la persona. Path param. Número entero. Requerido. Mínimo: 10000000. Máximo: 99999999.
+  - *limit*: Cantidad de registros en caso de paginado. Query param. Opcional.
+  - *X-PagingState*: Paging state devuelto por Cassandra en la anterior query con los mismos parámetros. Header. Opcional.
+- Devuelve:
+  - Lista de *DomicilioPersonaDTO*: Colección de JSONs.
+  - *X-PagingState*: Paging state para obtener la siguiente página en la siguiente consulta. Header.
+
+### api/Domicilio: GET
+Obtiene todos los domicilios asociados a un criterio de búsqueda, que puede ser por: Barrio, Localidad, Departamento. Los criterios se pueden combinar. El criterio se pasa como parámetro.
+- Recibe:
+  - *departamento*: Departamento. Query param. Opcional.
+  - *localidad*: Localidad. Query param. Opcional.
+  - *barrio*: Barrio. Query param. Opcional.
+- Devuelve:
+  - Lista de *DomicilioDTO*: Colección de JSONs.
