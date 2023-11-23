@@ -26,10 +26,10 @@ Tabla de contenidos
 5. [Instalar Cassandra con Docker en Windows](#instalar-cassandra-con-docker-en-windows)
 6. [Configurar la aplicación](#configurar-la-aplicación)
 7. [Servicios](#servicios)
-   1. [api/Persona: POST](#api-Persona-POST)
-   2. [api/Domicilio: POST](#api-Domicilio-POST)
-   3. [api/Domicilio/persona/{ci}: GET](#api-Domicilio-persona-ci-GET)
-   4. [api/Domicilio: GET](#api-Domicilio-GET)
+   1. [api/Persona: POST](#apipersona-post)
+   2. [api/Domicilio: POST](#apidomicilio-post)
+   3. [api/Domicilio/persona/{ci}: GET](#apidomiciliopersonaci-get)
+   4. [api/Domicilio: GET](#apidomicilio-get)
 
 Grupo
 -----
