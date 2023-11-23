@@ -1,0 +1,607 @@
+{
+	"info": {
+		"_postman_id": "c047aacd-ec7c-4708-be0e-1133d10ce31c",
+		"name": "Taller NoSQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31345615"
+	},
+	"item": [
+		{
+			"name": "Agregar persona - ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Se enviaron datos\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Los datos de la persona no pueden estar vacíos.\");\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La persona no existe\", function () {\r",
+							"   pm.response.to.not.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ci\": 35671976,\r\n  \"nombre\": \"Miguel\",\r\n  \"apellido\": \"Mogliazza\",\r\n  \"edad\": 41\r\n}\r\n"
+				},
+				"url": "https://localhost:63189/api/Persona"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar persona - 401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Se enviaron datos\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Los datos de la persona no pueden estar vacíos.\");\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La persona existe\", function () {\r",
+							"   pm.response.to.have.status(401);\r",
+							"});\r",
+							"pm.test(\"La respuesta es el mensaje solicitado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"La persona ya existe.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ci\": 35671976,\r\n  \"nombre\": \"Miguel\",\r\n  \"apellido\": \"Mogliazza\",\r\n  \"edad\": 41\r\n}\r\n"
+				},
+				"url": "https://localhost:63189/api/Persona"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar domicilio - ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"El usuario no existe\", function () {\r",
+							"    pm.response.to.not.have.status(402);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ci\": 35671976,\r\n  \"departamento\": \"Artigas\",\r\n  \"localidad\": \"Bella Unión\",\r\n  \"barrio\": \"Barrio los Olivos\",\r\n  \"calle\": \"Wilson Ferrerira Aldunate\",\r\n  \"nro\": 657,\r\n  \"apartamento\": \"1\",\r\n  \"padron\": 12457,\r\n  \"ruta\": \"472\",\r\n  \"km\": 593,\r\n  \"letra\": \"K\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:63189/api/Domicilio"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar domicilio - 402",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve el codigo de error pedido (402)\", function () {\r",
+							"   pm.response.to.have.status(402);\r",
+							"});\r",
+							"pm.test(\"La respuesta es el mensaje solicitado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No existe una persona con la cédula aportada como parámetro.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ci\": 35671976,\r\n  \"departamento\": \"Artigas\",\r\n  \"localidad\": \"Bella Unión\",\r\n  \"barrio\": \"Barrio los Olivos\",\r\n  \"calle\": \"Wilson Ferrerira Aldunate\",\r\n  \"nro\": 657,\r\n  \"apartamento\": \"1\",\r\n  \"padron\": 12457,\r\n  \"ruta\": \"472\",\r\n  \"km\": 593,\r\n  \"letra\": \"K\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:63189/api/Domicilio"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar domicilio - 402",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Finalizo con error 402\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"});\r",
+							"pm.test(\"La respuesta es el mensaje solicitado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No existe una persona con la cédula aportada como parámetro.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio/persona/12321311?limit=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio",
+						"persona",
+						"12321311"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver Departamento Montevideo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta es Montevideo\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Montevideo\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?departamento=Montevideo",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "departamento",
+							"value": "Montevideo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver Barrio La Pastoria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La respuesta es La pastoria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"La pastoria\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?localidad=La%20Pastoria",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "localidad",
+							"value": "La%20Pastoria"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver localidad Minas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La respuesta es Minas\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Minas\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?barrio=Minas",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "barrio",
+							"value": "Minas"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver localidad y departamento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La respuesta es departamento: Maldonado y localidad: Punta del Este\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Maldonado\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Punta del Este\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?departamento=Maldonado&localidad=Punta%20del%20Este",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "departamento",
+							"value": "Maldonado"
+						},
+						{
+							"key": "localidad",
+							"value": "Punta%20del%20Este"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver departamento y barrio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La respuesta es departamento: Montevideo y Barrio: Buceo\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Montevideo\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Buceo\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?departamento=Montevideo&localidad=Buceo",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "departamento",
+							"value": "Montevideo"
+						},
+						{
+							"key": "localidad",
+							"value": "Buceo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver localidad y barrio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La respuesta es localidad: Minas y Barrio: Las Pitas\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Minas\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Las Pitas\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?localidad=Minas&barrio=Las%20Pitas",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "localidad",
+							"value": "Minas"
+						},
+						{
+							"key": "barrio",
+							"value": "Las%20Pitas"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver departamento, localidad y barrio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Finalizo correctamente (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Demora un tiempo aceptable 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"Devuelve un JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"La respuesta no fue vacia?\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.match(/^\\[\\]$/);\r",
+							"});\r",
+							"pm.test(\"La respuesta es departamento: Salto, localidad: Salto y Barrio: Burton\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Salto\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Salto\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Burton\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:63189/api/Domicilio?departamento=Salto&localidad=Salto&barrio=Burton",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "63189",
+					"path": [
+						"api",
+						"Domicilio"
+					],
+					"query": [
+						{
+							"key": "departamento",
+							"value": "Salto"
+						},
+						{
+							"key": "localidad",
+							"value": "Salto"
+						},
+						{
+							"key": "barrio",
+							"value": "Burton"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
