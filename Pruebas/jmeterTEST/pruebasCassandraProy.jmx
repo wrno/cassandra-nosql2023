@@ -39,7 +39,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV_nombres" enabled="true">
-          <stringProp name="filename">C:/Users/USUARIO/Desktop/jmeterTEST/nombres.csv</stringProp>
+          <stringProp name="filename">nombres.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">nombre</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -51,7 +51,7 @@
         </CSVDataSet>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV_apellidos" enabled="true">
-          <stringProp name="filename">C:/Users/USUARIO/Desktop/jmeterTEST/apellidos.csv</stringProp>
+          <stringProp name="filename">apellidos.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">apellido</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -79,7 +79,7 @@
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">55532</stringProp>
+          <stringProp name="HTTPSampler.port">32780</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/api/Persona</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -238,7 +238,7 @@
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Domicilios" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Domicilios" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Controlador Bucle" enabled="true">
           <stringProp name="LoopController.loops">2</stringProp>
@@ -337,7 +337,7 @@
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">55532</stringProp>
+          <stringProp name="HTTPSampler.port">32780</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/api/Domicilio</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -493,7 +493,7 @@
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">55532</stringProp>
+          <stringProp name="HTTPSampler.port">32780</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/api/Domicilio/persona/${cedula}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -649,7 +649,7 @@
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">55532</stringProp>
+          <stringProp name="HTTPSampler.port">32780</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/api/domicilio?departamento=${departamento}&amp;barrio=${barrio}&amp;localidad=${localidad}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
